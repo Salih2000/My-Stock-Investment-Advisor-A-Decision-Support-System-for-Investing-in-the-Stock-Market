@@ -1,0 +1,300 @@
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-spinner {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+  display: none;
+}
+#tickers-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+.stock-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 430px;
+  min-height: 600px;
+  height: 950px;
+  margin: 10px;
+  padding: 10px;
+  transition: background-color 0.5s;
+  background: #8ec6d4;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 255, 0.5);
+}
+
+.remove-btn {
+  width: 100%;
+  margin-top: auto; /* Adjusted to push the button to the bottom */
+}
+
+/* Add this to your existing CSS or create a new style block */
+.zebra-striping {
+  background-color: #f9f9f9; /* Set the background color for even rows */
+}
+
+/* Target odd rows and apply the zebra-striping class */
+.stock-box:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Target even rows and apply the zebra-striping class */
+.stock-box:nth-child(odd) {
+  background-color: #ffffff; /* Set the background color for odd rows */
+}
+
+.light-red {
+  color: #ffcccc;
+}
+
+.dark-red {
+  color: #ff0000;
+}
+
+.gray {
+  color: #808080;
+}
+
+.dark-green {
+  color: #008000;
+}
+
+.light-green {
+  color: #ccffcc;
+}
+
+.updated {
+  transition: background-color 1s;
+  background-color: #ccc !important;
+}
+
+.red-flash {
+  transition: background-color 1s;
+  background-color: #ffcccc !important;
+}
+
+.green-flash {
+  transition: background-color 1s;
+  background-color: #ccffcc !important;
+}
+
+.gray-flash {
+  transition: background-color 1s;
+  background-color: #ccc !important;
+}
+
+.box-title,
+.box-content {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.table-wrap {
+  display: inline-block;
+}
+
+.bold-value {
+  font-weight: bold;
+}
+
+/*------------------------Navigation Bar------------------------*/
+
+.body {
+  display: flex;
+}
+
+/* Add a black background color to the top navigation */
+.topnav {
+  background-color: #163359;
+  overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: center;
+  color: #ffffff;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  letter-spacing: 3px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ffffff;
+  color: #163359;
+  border-radius: 40px;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #ffffff;
+  color: #163359;
+  border-radius: 40px;
+}
+
+.container {
+  position: relative;
+  max-width: 800px; /* Maximum width */
+  margin: 0 auto; /* Center it */
+}
+
+.container .content {
+  position: absolute; /* Position the background text */
+  bottom: 0; /* At the bottom. Use top:0 to append it to the top */
+  background: rgb(0, 0, 0); /* Fallback color */
+  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+  color: #ffffff; /* Grey text */
+  width: 96%; /* Full width */
+  padding: 20px; /* Some padding */
+}
+
+#logo {
+  width: 450px;
+  height: 80px;
+  margin-top: 30px;
+  margin-left: 50px;
+  margin-bottom: 30px;
+}
+
+#navbarbuttons {
+  margin-top: 60px;
+  margin-left: 620px;
+  margin-bottom: 50px;
+}
+
+#yatirim {
+  margin-left: 110px;
+}
+
+#temettu {
+  margin-left: 110px;
+}
+
+/* -------Hisse Karşılaştırma------- */
+#hissebaslik {
+  color: #163359;
+  font-size: xx-large;
+  font-style: normal;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: underline;
+  margin-top: 80px;
+  text-align: center;
+}
+
+/* Versus Table*/
+#add-ticker-form {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#tablelocation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Align to the top /
+  height: 100vh; / 100% of the viewport height /
+  margin: 150; / Remove default margin */
+}
+
+/* -------Bilgilemdirme Tablosu------- */
+#bilgilendirmebaslik {
+  color: #163359;
+  font-size: xx-large;
+  font-style: normal;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: underline;
+  text-align: center;
+  margin-top: 80px;
+  margin-bottom: 30px;
+}
+
+.table,
+th,
+td {
+  border: 2px solid black;
+  border-collapse: collapse;
+  height: 40px;
+  font-size: large;
+  background-color: #eff5ff;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* -------Bize Ulaşın------- */
+.column {
+  float: left;
+}
+
+#bizeulasin {
+  background-color: #163359;
+  height: 65px;
+  margin-top: 70px;
+}
+
+#numara {
+  color: #ffffff;
+  margin-left: 225px;
+}
+
+#mail {
+  color: #ffffff;
+  margin-left: 100px;
+}
+
+#instagram {
+  margin-left: 550px;
+  margin-top: 8px;
+}
+
+#xtwitter {
+  margin-left: 35px;
+  margin-top: 8px;
+}
+
+#linkedin {
+  margin-left: 35px;
+  margin-top: 8px;
+}
+
+#youtube {
+  margin-left: 35px;
+  margin-top: 9px;
+}
+
+/* -------Yasal Haklar------- */
+#yasalhaklar {
+  margin-top: 50px;
+  text-align: center;
+}
+
+#part2 {
+  text-align: center;
+}
+
+#part3 {
+  text-align: center;
+}
+
+#part4 {
+  text-align: center;
+}

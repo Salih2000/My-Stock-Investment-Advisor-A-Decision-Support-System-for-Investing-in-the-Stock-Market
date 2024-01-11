@@ -1,0 +1,55 @@
+
+
+.add_ticker_form{
+    display: flex;
+    gap: 10px;
+    align-items: center; 
+    justify-content: center;
+    width: 100%;
+}
+
+/* Input Desing */
+.add_ticker_input {
+    background-color: rgb(235, 248, 255);
+    border: none;
+    box-shadow: 0 6px 10px rgba(63, 63, 63, 0.3);
+    padding: 10px 5px 10px 5px;
+    color: black;
+}
+
+.add_ticker_btn {
+    background-color: #0e7bff;
+    border: none;
+    padding: 5px 10px 5px 10px;
+    font-size: 16px;
+    color: white;
+}
+
+
+.text_17 {
+    font-size: 17px;
+}
+
+
+.w_full{
+    width: 100%;
+}
+
+.items_center {
+    align-items: center;
+}
+
+.justify_between {
+    justify-content: space-between;
+}
+
+.display_flex {
+    display: flex;
+}
+
+.gap_2{
+    gap: 8px;
+}
+
+
+

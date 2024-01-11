@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Stock Price Tracker</title>
+    <link rel="stylesheet" href="/static/calculatorstyle.css">
+    <link rel="icon" type="image" href="{{ url_for('static', path='/images/mavi.png') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/calculatorscript.js"></script>
+    
+    <style>
+        /* Calculator Design */
+      
+        .date_grid_class {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+          align-items: start;
+          justify-content: start;
+        }
+        .calculator_select_data {
+          background-color: white;
+          border: 1px solid rgba(218, 218, 218, 0.2);
+          border-radius: 10px;
+          cursor: pointer;
+          padding: 5px 10px 5px 10px;
+        }
+      
+        .calculator_select_data:hover {
+          border: 1px solid #adadad;
+        }
+      
+        .calculator_select_total {
+          background-color: white;
+          border: 1px solid rgba(218, 218, 218, 0.2);
+          border-radius: 5px;
+          padding: 5px 10px 5px 10px;
+        }
+        .calculator_select_total:hover {
+          border: 1px solid #adadad;
+        }
+      </style>
+
+</head>
+<body style="background-color: #EFF5FF">
+
+    <!--Navigation Bar-->
+    <div id="navbar" class="topnav">
+        <div class="navbar-header">
+            <img id="logo" src="{{ url_for('static', path='/images/beyaz1.png') }}" alt="logo">
+        </div>
+        <div id="navbarbuttons">
+          <a id="Hisse" href="/" class="text_17"><b>Hisseleri Karşılaştır</b></a>
+          <a id="yatirim" href="/indexcalculator" class="text_17"><b>Karşılaştırmalı Geçmiş Hisse Getirisi</b></a>
+          <a id="temettu" href="indexcsv" class="text_17"><b>Temettü Hisseleri</b></a>
+        </div>
+    </div>
+
+    <div>
+        <h2 id="temettubaslik"><b></b></h2>
+    </div>
+    <div id="calculatortable">
+        <!-- Add the loading spinner container -->
+        <div class="loading-container">
+            <div class="loading-spinner"></div>
+            <div class="loading-message">Updating Prices...</div>
+        </div>
+    
+        <form id="add-ticker-form" style="display:flex; gap: 10px; width: 10  0%; align-items: center; justify-content: center;">
+            <div class="date_grid_class">
+                <label for="purchase-date">Ekle</label>
+                <input type="text" id="new-ticker"  class="calculator_select_total" placeholder="Hisse Ekle" required autocomplete="off" list="ticker-options" style="width: 300px;">
+              </div>
+           
+            <datalist id="ticker-options" size="5">
+                <option value="A1CAP">
+                <option value="ACSEL">
+                <option value="ADEL">
+                <option value="ADESE">
+                <option value="ADGYO">
+                <option value="AEFES">
+                <option value="AFYON">
+                <option value="AGESA">
+                <option value="AGHOL">
+                <option value="AGROT">
+                <option value="AGYO">
+                <option value="AHGAZ">
+                <option value="AKBNK">
+                <option value="AKCNS">
+                <option value="AKENR">
+                <option value="AKFGY">
+                <option value="AKFYE">
+                <option value="AKGRT">
+                <option value="AKMGY">
+                <option value="AKSA">
+                <option value="AKSEN">
+                <option value="AKSGY">
+                <option value="AKSUE">
+                <option value="AKYHO">
+                <option value="ALARK">
+                <option value="ALBRK">
+                <option value="ALCAR">
+                <option value="ALCTL">
+                <option value="ALFAS">
+                <option value="ALGYO">
+                <option value="ALKA">
+                <option value="ALKIM">
+                <option value="ALMAD">
+                <option value="ALTIN">
+                <option value="ANELE">
+                <option value="ANGEN">
+                <option value="ANHYT">
+                <option value="ANSGR">
+                <option value="ARASE">
+                <option value="ARCLK">
+                <option value="ARDYZ">
+                <option value="ARENA">
+                <option value="ARSAN">
+                <option value="ARZUM">
+                <option value="ASELS">
+                <option value="ASGYO">
+                <option value="ASTOR">
+                <option value="ASUZU">
+                <option value="ATAGY">
+                <option value="ATAKP">
+                <option value="ATATP">
+                <option value="ATEKS">
+                <option value="ATLAS">
+                <option value="ATSYH">
+                <option value="AVGYO">
+                <option value="AVHOL">
+                <option value="AVOD">
+                <option value="AVTUR">
+                <option value="AYCES">
+                <option value="AYDEM">
+                <option value="AYEN">
+                <option value="AYES">
+                <option value="AYGAZ">
+                <option value="AZTEK">
+                <option value="BAGFS">
+                <option value="BAKAB">
+                <option value="BALAT">
+                <option value="BANVT">
+                <option value="BARMA">
+                <option value="BASCM">
+                <option value="BASGZ">
+                <option value="BAYRK">
+                <option value="BEGYO">
+                <option value="BERA">
+                <option value="BEYAZ">
+                <option value="BFREN">
+                <option value="BIENY">
+                <option value="BIGCH">
+                <option value="BIMAS">
+                <option value="BINHO">
+                <option value="BIOEN">
+                <option value="BIZIM">
+                <option value="BJKAS">
+                <option value="BLCYT">
+                <option value="BMSCH">
+                <option value="BMSTL">
+                <option value="BNTAS">
+                <option value="BOBET">
+                <option value="BORLS">
+                <option value="BOSSA">
+                <option value="BRISA">
+                <option value="BRKO">
+                <option value="BRKSN">
+                <option value="BRKVY">
+                <option value="BRLSM">
+                <option value="BRMEN">
+                <option value="BRSAN">
+                <option value="BRYAT">
+                <option value="BSOKE">
+                <option value="BTCIM">
+                <option value="BUCIM">
+                <option value="BURCE">
+                <option value="BURVA">
+                <option value="BVSAN">
+                <option value="BYDNR">
+                <option value="CANTE">
+                <option value="CASA">
+                <option value="CATES">
+                <option value="CCOLA">
+                <option value="CELHA">
+                <option value="CEMAS">
+                <option value="CEMTS">
+                <option value="CEOEM">
+                <option value="CIMSA">
+                <option value="CLEBI">
+                <option value="CMBTN">
+                <option value="CMENT">
+                <option value="CONSE">
+                <option value="COSMO">
+                <option value="CRDFA">
+                <option value="CRFSA">
+                <option value="CUSAN">
+                <option value="CVKMD">
+                <option value="CWENE">
+                <option value="DAGHL">
+                <option value="DAGI">
+                <option value="DAPGM">
+                <option value="DARDL">
+                <option value="DENGE">
+                <option value="DERHL">
+                <option value="DERIM">
+                <option value="DESA">
+                <option value="DESPC">
+                <option value="DEVA">
+                <option value="DGATE">
+                <option value="DGGYO">
+                <option value="DGNMO">
+                <option value="DIRIT">
+                <option value="DITAS">
+                <option value="DMRGD">
+                <option value="DMSAS">
+                <option value="DNISI">
+                <option value="DOAS">
+                <option value="DOBUR">
+                <option value="DOCO">
+                <option value="DOFER">
+                <option value="DOGUB">
+                <option value="DOHOL">
+                <option value="DOKTA">
+                <option value="DURDO">
+                <option value="DYOBY">
+                <option value="DZGYO">
+                <option value="EBEBK">
+                <option value="ECILC">
+                <option value="ECZYT">
+                <option value="EDATA">
+                <option value="EDIP">
+                <option value="EGEEN">
+                <option value="EGEPO">
+                <option value="EGGUB">
+                <option value="EGPRO">
+                <option value="EGSER">
+                <option value="EKGYO">
+                <option value="EKIZ">
+                <option value="EKOS">
+                <option value="EKSUN">
+                <option value="ELITE">
+                <option value="EMKEL">
+                <option value="EMNIS">
+                <option value="ENERY">
+                <option value="ENJSA">
+                <option value="ENKAI">
+                <option value="ENSRI">
+                <option value="EPLAS">
+                <option value="ERBOS">
+                <option value="ERCB">
+                <option value="EREGL">
+                <option value="ERSU">
+                <option value="ESCAR">
+                <option value="ESCOM">
+                <option value="ESEN">
+                <option value="ETILR">
+                <option value="ETYAT">
+                <option value="EUHOL">
+                <option value="EUKYO">
+                <option value="EUPWR">
+                <option value="EUREN">
+                <option value="EUYO">
+                <option value="EYGYO">
+                <option value="FADE">
+                <option value="FENER">
+                <option value="FLAP">
+                <option value="FMIZP">
+                <option value="FONET">
+                <option value="FORMT">
+                <option value="FORTE">
+                <option value="FRIGO">
+                <option value="FROTO">
+                <option value="FZLGY">
+                <option value="GARAN">
+                <option value="GARFA">
+                <option value="GEDIK">
+                <option value="GEDZA">
+                <option value="GENIL">
+                <option value="GENTS">
+                <option value="GEREL">
+                <option value="GESAN">
+                <option value="GIPTA">
+                <option value="GLBMD">
+                <option value="GLCVY">
+                <option value="GLRYH">
+                <option value="GLYHO">
+                <option value="GMTAS">
+                <option value="GOKNR">
+                <option value="GOLTS">
+                <option value="GOODY">
+                <option value="GOZDE">
+                <option value="GRNYO">
+                <option value="GRSEL">
+                <option value="GRTRK">
+                <option value="GSDDE">
+                <option value="GSDHO">
+                <option value="GSRAY">
+                <option value="GUBRF">
+                <option value="GWIND">
+                <option value="GZNMI">
+                <option value="HALKB">
+                <option value="HATEK">
+                <option value="HATSN">
+                <option value="HDFGS">
+                <option value="HEDEF">
+                <option value="HEKTS">
+                <option value="HKTM">
+                <option value="HLGYO">
+                <option value="HTTBT">
+                <option value="HUBVC">
+                <option value="HUNER">
+                <option value="HURGZ">
+                <option value="ICBCT">
+                <option value="ICUGS">
+                <option value="IDEAS">
+                <option value="IDGYO">
+                <option value="IEYHO">
+                <option value="IHAAS">
+                <option value="IHEVA">
+                <option value="IHGZT">
+                <option value="IHLAS">
+                <option value="IHLGM">
+                <option value="IHYAY">
+                <option value="IMASM">
+                <option value="INDES">
+                <option value="INFO">
+                <option value="INGRM">
+                <option value="INTEM">
+                <option value="INVEO">
+                <option value="INVES">
+                <option value="IPEKE">
+                <option value="ISATR">
+                <option value="ISBIR">
+                <option value="ISBTR">
+                <option value="ISCTR">
+                <option value="ISDMR">
+                <option value="ISFIN">
+                <option value="ISGSY">
+                <option value="ISGYO">
+                <option value="ISKPL">
+                <option value="ISKUR">
+                <option value="ISMEN">
+                <option value="ISSEN">
+                <option value="ISYAT">
+                <option value="IZENR">
+                <option value="IZFAS">
+                <option value="IZINV">
+                <option value="IZMDC">
+                <option value="JANTS">
+                <option value="KAPLM">
+                <option value="KAREL">
+                <option value="KARSN">
+                <option value="KARTN">
+                <option value="KARYE">
+                <option value="KATMR">
+                <option value="KAYSE">
+                <option value="KCAER">
+                <option value="KCHOL">
+                <option value="KENT">
+                <option value="KERVN">
+                <option value="KERVT">
+                <option value="KFEIN">
+                <option value="KGYO">
+                <option value="KIMMR">
+                <option value="KLGYO">
+                <option value="KLKIM">
+                <option value="KLMSN">
+                <option value="KLNMA">
+                <option value="KLRHO">
+                <option value="KLSER">
+                <option value="KLSYN">
+                <option value="KMPUR">
+                <option value="KNFRT">
+                <option value="KONKA">
+                <option value="KONTR">
+                <option value="KONYA">
+                <option value="KOPOL">
+                <option value="KORDS">
+                <option value="KOZAA">
+                <option value="KOZAL">
+                <option value="KRDMA">
+                <option value="KRDMB">
+                <option value="KRDMD">
+                <option value="KRGYO">
+                <option value="KRONT">
+                <option value="KRONT">
+                <option value="KRPLS">
+                <option value="KRSTL">
+                <option value="KRTEK">
+                <option value="KRVGD">
+                <option value="KSTUR">
+                <option value="KTLEV">
+                <option value="KTSKR">
+                <option value="KUTPO">
+                <option value="KUVVA">
+                <option value="KUYAS">
+                <option value="KZBGY">
+                <option value="KZGYO">
+                <option value="LIDER">
+                <option value="LIDFA">
+                <option value="LINK">
+                <option value="LKMNH">
+                <option value="LOGO">
+                <option value="LRSHO">
+                <option value="LUKSK">
+                <option value="MAALT">
+                <option value="MACKO">
+                <option value="MAGEN">
+                <option value="MAKIM">
+                <option value="MAKTK">
+                <option value="MANAS">
+                <option value="MARBL">
+                <option value="MARKA">
+                <option value="MARTI">
+                <option value="MAVI">
+                <option value="MEDTR">
+                <option value="MEGAP">
+                <option value="MEKAG">
+                <option value="MEPET">
+                <option value="MERCN">
+                <option value="MERIT">
+                <option value="MERKO">
+                <option value="METRO">
+                <option value="METUR">
+                <option value="MGROS">
+                <option value="MHRGY">
+                <option value="MIATK">
+                <option value="MIPAZ">
+                <option value="MMCAS">
+                <option value="MNDRS">
+                <option value="MNDTR">
+                <option value="MOBTL">
+                <option value="MPARK">
+                <option value="MRGYO">
+                <option value="MRSHL">
+                <option value="MSGYO">
+                <option value="MTRKS">
+                <option value="MTRYO">
+                <option value="MZHLD">
+                <option value="NATEN">
+                <option value="NETAS">
+                <option value="NIBAS">
+                <option value="NTGAZ">
+                <option value="NTHOL">
+                <option value="NUGYO">
+                <option value="NUHCM">
+                <option value="OBASE">
+                <option value="ODAS">
+                <option value="OFSYM">
+                <option value="ONCSM">
+                <option value="ORCAY">
+                <option value="ORGE">
+                <option value="ORMA">
+                <option value="OSMEN">
+                <option value="OSTIM">
+                <option value="OTKAR">
+                <option value="OTTO">
+                <option value="OYAKC">
+                <option value="OYAYO">
+                <option value="OYLUM">
+                <option value="OYYAT">
+                <option value="OZGYO">
+                <option value="OZKGY">
+                <option value="OZRDN">
+                <option value="OZSUB">
+                <option value="PAGYO">
+                <option value="PAMEL">
+                <option value="PAPIL">
+                <option value="PARSN">
+                <option value="PASEU">
+                <option value="PCILT">
+                <option value="PEGYO">
+                <option value="PEKGY">
+                <option value="PENGD">
+                <option value="PENTA">
+                <option value="PETKM">
+                <option value="PETUN">
+                <option value="PGSUS">
+                <option value="PINSU">
+                <option value="PKART">
+                <option value="PKENT">
+                <option value="PLTUR">
+                <option value="PNLSN">
+                <option value="PNSUT">
+                <option value="POLHO">
+                <option value="POLTK">
+                <option value="PRDGS">
+                <option value="PRKAB">
+                <option value="PRKME">
+                <option value="PRZMA">
+                <option value="PSDTC">
+                <option value="PSGYO">
+                <option value="QNBFB">
+                <option value="QNBFL">
+                <option value="QUAGR">
+                <option value="RALYH">
+                <option value="RAYSG">
+                <option value="REEDR">
+                <option value="RNPOL">
+                <option value="RODRG">
+                <option value="ROYAL">
+                <option value="RTALB">
+                <option value="RUBNS">
+                <option value="RYGYO">
+                <option value="RYSAS">
+                <option value="SAFKR">
+                <option value="SAHOL">
+                <option value="SAMAT">
+                <option value="SANEL">
+                <option value="SANFM">
+                <option value="SANKO">
+                <option value="SARKY">
+                <option value="SASA">
+                <option value="SAYAS">
+                <option value="SDTTR">
+                <option value="SEGYO">
+                <option value="SEKFK">
+                <option value="SEKUR">
+                <option value="SELEC">
+                <option value="SELGD">
+                <option value="SELVA">
+                <option value="SEYKM">
+                <option value="SILVR">
+                <option value="SISE">
+                <option value="SKBNK">
+                <option value="SKTAS">
+                <option value="SKYMD">
+                <option value="SMART">
+                <option value="SMRTG">
+                <option value="SNGYO">
+                <option value="SNICA">
+                <option value="SNKRN">
+                <option value="SNPAM">
+                <option value="SODSN">
+                <option value="SOKE">
+                <option value="SOKM">
+                <option value="SONME">
+                <option value="SRVGY">
+                <option value="SUMAS">
+                <option value="SUNTK">
+                <option value="SUWEN">
+                <option value="TABGD">
+                <option value="TARKM">
+                <option value="TATEN">
+                <option value="TATGD">
+                <option value="TAVHL">
+                <option value="TBORG">
+                <option value="TCELL">
+                <option value="TDGYO">
+                <option value="TEKTU">
+                <option value="TERA">
+                <option value="TETMT">
+                <option value="TEZOL">
+                <option value="TGSAS">
+                <option value="THYAO">
+                <option value="TKFEN">
+                <option value="TKNSA">
+                <option value="TLMAN">
+                <option value="TMPOL">
+                <option value="TMSN">
+                <option value="TNZTP">
+                <option value="TOASO">
+                <option value="TRCAS">
+                <option value="TRGYO">
+                <option value="TRILC">
+                <option value="TSGYO">
+                <option value="TSKB">
+                <option value="TSPOR">
+                <option value="TTKOM">
+                <option value="TTRAK">
+                <option value="TUCLK">
+                <option value="TUKAS">
+                <option value="TUPRS">
+                <option value="TUREX">
+                <option value="TURGG">
+                <option value="TURSG">
+                <option value="UFUK">
+                <option value="ULAS">
+                <option value="ULKER">
+                <option value="ULUFA">
+                <option value="ULUSE">
+                <option value="ULUUN">
+                <option value="UMPAS">
+                <option value="UNLU">
+                <option value="USAK">
+                <option value="UZERB">
+                <option value="VAKBN">
+                <option value="VAKFN">
+                <option value="VAKKO">
+                <option value="VANGD">
+                <option value="VBTYZ">
+                <option value="VERTU">
+                <option value="VERUS">
+                <option value="VESBE">
+                <option value="VESTL">
+                <option value="VKFYO">
+                <option value="VKGYO">
+                <option value="VKING">
+                <option value="VRGYO">
+                <option value="YAPRK">
+                <option value="YATAS">
+                <option value="YAYLA">
+                <option value="YBTAS">
+                <option value="YEOTK">
+                <option value="YESIL">
+                <option value="YGGYO">
+                <option value="YGYO">
+                <option value="YKBNK">
+                <option value="YKSLN">
+                <option value="YONGA">
+                <option value="YUNSA">
+                <option value="YYAPI">
+                <option value="YYLGD">
+                <option value="ZEDUR">
+                <option value="ZOREN">
+                <option value="ZRGYO">
+                <option value="BTC-USD">
+    
+            </datalist>
+    
+            <div class="date_grid_class">
+            <label for="purchase-date">Alım Tarihi:</label>
+            <input
+              type="date"
+              id="purchase-date"
+              class="calculator_select_data"
+              placeholder="Purchase Date"
+              required
+            />
+          </div>
+          
+          <div class="date_grid_class">
+              <label for="total-investment">Yatırım tutarı:</label>
+              <div style="display: flex; align-items: center; gap: 5px;">
+                  <input
+                type="number"
+                id="total-investment"
+                class="calculator_select_total"
+                placeholder="₺ Yatırım Tutarı Ekle"
+                required
+              />
+              
+              <button type="submit" style="background-color: black; border: none; color:white; cursor: pointer; padding: 5px 10px 5px 10px; border-radius: 5px;">Ekle</button>
+              </div>
+            </div>
+          
+        </form>
+        <script>
+          var tickerOptions = [
+            "EREGL", "SAHOL", "TCELL", "FORDO", "BIMAS", "ECZB", "SISE", "MEYAL", "TUBEG", "DOGUAR", "SISE", "SABAN", "KOCAL", "SELVA", "ENKA", "MAVI", "TATGD", "HEDEF", "FENER", "KCHOL", "KORDS", "THYAO", "ALGYO", "ARMAS", "FROTO", "GOLTS", "BIMAS", "TAVHL", "TMSN", "DGNMO", "BJKAS", "ARCLK", "PETKM", "TTKOM", "VESBE", "TOASO", "PGSUS", "SASA", "KRDMD", "SODA", "DOHOL", "LOGO", "KARSN", "TTRAK", "ORGE", "TRGYO", "ALKIM", "OYAKC", "ZOREN", "TSPOR",
+          ];
+        
+          var tickerInput = document.getElementById("new-ticker");
+          var index = 0;
+          var placeholderText = "";
+          var typingSpeed = 100; // Adjust typing speed in milliseconds
+        
+          function updatePlaceholder() {
+            var currentTicker = tickerOptions[index];
+            var currentPlaceholder = tickerInput.placeholder;
+        
+            if (currentTicker.length > currentPlaceholder.length) {
+              placeholderText += currentTicker[currentPlaceholder.length];
+            } else {
+              placeholderText = placeholderText.slice(0, -1);
+            }
+        
+            tickerInput.placeholder = placeholderText;
+        
+            if (placeholderText !== currentTicker) {
+              setTimeout(updatePlaceholder, typingSpeed);
+            } else {
+              // Wait for a moment before deleting
+              setTimeout(deletePlaceholder, 1000);
+            }
+          }
+        
+          function deletePlaceholder() {
+            placeholderText = tickerInput.placeholder;
+            tickerInput.placeholder = placeholderText.slice(0, -1);
+        
+            if (placeholderText.length > 0) {
+              setTimeout(deletePlaceholder, typingSpeed);
+            } else {
+              // Move to the next ticker
+              index = (index + 1) % tickerOptions.length;
+              setTimeout(updatePlaceholder, typingSpeed);
+            }
+          }
+        
+          // Call the function initially
+          updatePlaceholder();
+        </script>
+    </div>
+    
+    <div id="tickers-grid"></div>
+    
+
+    <!--Bize Ulaşın-->
+    <div id="bizeulasin" class="">
+        <h3 id="numara" class="column">+90 (232) 386 00 00</h3>
+        <h3 id="mail" class="column">bilgi@versusstock.com.tr</h3>
+        <input id="instagram" class="column" type="image" onclick="parent.location='#'" src="{{ url_for('static', path='/images/instagram.png') }}">
+        <input id="xtwitter" class="column" type="image" onclick="parent.location='#'" src="{{ url_for('static', path='/images/xtwitter.png') }}">
+        <input id="linkedin" class="column" type="image" onclick="parent.location='#'" src="{{ url_for('static', path='/images/linkedin.png') }}">
+        <input id="youtube" class="column" type="image" onclick="parent.location='#'" src="{{ url_for('static', path='/images/youtube.png') }}">
+    </div>
+
+    <!--Yasal Haklar-->
+    <div id="yasalhaklar">
+        <h6 id="part1">Bu sitede yer alan bilgiler “Versus Stock A.Ş.” tarafından genel bilgilendirme amacı ile hazırlanmıştır. Yatırım bilgi, yorum ve tavsiyeleri yatırım danışmanlığı kapsamında değildir ve sermaye piyasasındaki alım satım kararlarınızı 
+            destekleyecek yeterli bilgiyi içermeyebilir.</h6>
+        <h6 id="part2">Bu içeriğe ilişkin tüm telif hakları Versus Stock A.Ş.’ye aittir. Bu içerik, açık iznimiz olmaksızın başkaları tarafından herhangi bir amaçla, kısmen veya tamamen çoğaltılamaz, dağıtılamaz, yayımlanamaz veya değiştirilemez.
+        </h6>
+        <h6 id="part3">Veriler Yahoo Bilgi İletişim Hiz. A.Ş. tarafından sağlanmaktadır.</h6>
+        <h6 id="part4">© 2023 Versus Stock A.Ş.</h6>
+    </div>
+
+</body>
+
+</html>

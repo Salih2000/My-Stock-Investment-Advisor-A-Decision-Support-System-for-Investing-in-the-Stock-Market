@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> <!-- Add jQuery UI ThemeRoller styles -->
+    <link rel="stylesheet" href="">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Stock Dividends</title>
+
+    <!-- Include DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="/static/csvstyle.css">
+    <link rel="icon" type="image" href="{{ url_for('static', path='/images/mavi.png') }}">
+
+    <!-- Add any additional styling you need -->
+</head> 
+<body>
+
+    <div id="navbar" class="topnav">
+        <div class="navbar-header">
+            <img id="logo" src="{{ url_for('static', path='/images/beyaz1.png') }}" alt="logo">
+        </div>
+        <div id="navbarbuttons">
+            <a class="active" href="/" class="text_17"><b>Hisseleri Karşılaştır</b></a>
+            <a id="yatirim" href="/indexcalculator" class="text_17"><b>Karşılaştırmalı Geçmiş Hisse Getirisi</b></a>
+            <a id="temettu" href="indexcsv" class="text_17"><b>Temettü Hisseleri</b></a>
+        </div>
+    </div>
+
+    <div class="excel-container" style="margin: 0 auto; padding: 0 20%;">
+        {{ excel_data | safe }}
+    </div>
+
+    <!-- Include jQuery and DataTables JavaScript files -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+
+    <!-- Include jQuery UI JavaScript file -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- Initialize DataTables for your table -->
+    <script>
+        
+        $(document).ready(function() {
+            $('.excel-container table').DataTable();
+            $('.dataTables_filter input').attr('placeholder', 'Arama');
+            
+            
+            var table = new DataTable('#myTable', {
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/tr.json',
+                },
+            });
+        });
+    </script>
+    </script>
+
+
+    
+    <div style="margin: 0 auto; padding: 0 20%;">
+        <table class="center">
+            <tr>
+                <th>Yaşam Ömrü</th>
+                <td>Bir şirketin halka arz yılından itibaren geçen yıl sayısıdır. 2004 yılı ve öncesinde halka arz olan şirketler için halka arz yılı 2004 olarak dikkate alınır. Bu metrik, şirketin faaliyet süresini ve tecrübesini ölçmede kullanılır.</td>
+            </tr>
+            <tr>
+                <th>Frekans</th>
+                <td>Bir şirketin yaşamı boyunca temettü verdiği toplam yıl sayısını ifade eder. Yılda birden fazla temettü verilmesi durumunda yalnızca bir yıllık temettü ödeme dikkate alınır. Bu metrik, şirketin hissedarlarına düzenli olarak temettü ödeme geçmişini gösterir.</td>
+            </tr>
+            <tr>
+                <th>Düzenlilik</th>
+                <td>'Frekans' metriğinin 'Yaşam Ömrü' metriğine oranı olarak hesaplanır ve %100 olarak ifade edilir. Bu metrik, şirketin uzun vadeli temettü ödeme tutarlılığını ölçmede kullanılır. Yüksek düzenlilik oranına sahip şirketler, yatırımcılar tarafından daha güvenilir ve istikrarlı olarak değerlendirilir.</td>
+            </tr>
+            <tr>
+                <th>Ortalama Verim</th>
+                <td>Bir şirketin yaşamı boyunca temettü verimliliklerinin ortalamasıdır. Yılda birden fazla temettü verilmesi durumunda o yıla ait temettü verimliliklerinin toplamı alınır ve ortalamaya dahil edilir. Bu metrik, şirketin yatırımcılara sağladığı ortalama getiriyi ölçmede kullanılır. Yüksek ortalama verime sahip şirketler, yatırımcılar tarafından daha cazip olarak değerlendirilir.</td>
+            </tr>
+            <tr>
+                <th>Güncel Düzenlilik</th>
+                <td>Şirketin son üç yıldaki (2023, 2022, 2021) temettü ödeme düzenliliğini gösterir. Yılda birden fazla temettü verilmesi durumunda yalnızca bir yıllık temettü ödeme dikkate alınır. Bu metrik, şirketin yakın geçmişteki temettü ödeme tutarlılığını ölçmede kullanılır. Yüksek güncel düzenlilik oranına sahip şirketler, yatırımcılar tarafından daha güvenilir ve istikrarlı olarak değerlendirilir.</td> 
+            </tr>
+            <tr>
+                <th>Güncel (Son 3 Yıl) Verimlilik - WMA</th>
+                <td>Şirketin son üç yıldaki (2023, 2022, 2021) temettü verimliliklerinin ağırlıklı hareketli ortalamasını ifade eder. Yılda birden fazla temettü verilmesi durumunda o yıla ait temettü verimliliklerinin toplamı alınır ve ortalamaya dahil edilir. Bu metrik, şirketin yakın geçmişteki ortalama getirisini ölçmede kullanılır. Yüksek güncel (son 3 yıl) verimlilik - WMA değerine sahip şirketler, yatırımcılar tarafından daha cazip olarak değerlendirilir.</td> 
+            </tr>
+        </table>
+    </div>
+    <script>
+        // Add interactivity to the table
+        $(document).ready(function() {
+            $('table.center tr').hover(
+                function() {
+                    $(this).addClass('highlight');
+                },
+                function() {
+                    $(this).removeClass('highlight');
+                }
+            );
+        });
+    </script>
+
+    <!--Bize Ulaşın-->
+    <div id="bizeulasin" class="">
+        <h3 id="numara" class="column">+90 (232) 386 00 00</h3>
+        <h3 id="mail" class="column">bilgi@versusstock.com.tr</h3>
+        <input id="instagram" class="column" type="image" onclick="parent.location='#'" src="{{ url_for('static', path='/images/instagram.png') }}">
+        <input id="xtwitter" class="column" type="image" onclick="parent.location='#'" src="{{ url_for('static', path='/images/xtwitter.png') }}">
+        <input id="linkedin" class="column" type="image" onclick="parent.location='#'" src="{{ url_for('static', path='/images/linkedin.png') }}">
+        <input id="youtube" class="column" type="image" onclick="parent.location='#'" src="{{ url_for('static', path='/images/youtube.png') }}">
+    </div>
+    
+    <!--Yasal Haklar-->
+    <div id="yasalhaklar">
+        <h6 id="part1">Bu sitede yer alan bilgiler “Versus Stock A.Ş.” tarafından genel bilgilendirme amacı ile hazırlanmıştır. Yatırım bilgi, yorum ve tavsiyeleri yatırım danışmanlığı kapsamında değildir ve sermaye piyasasındaki alım satım kararlarınızı 
+            destekleyecek yeterli bilgiyi içermeyebilir.</h6>
+        <h6 id="part2">Bu içeriğe ilişkin tüm telif hakları Versus Stock A.Ş.’ye aittir. Bu içerik, açık iznimiz olmaksızın başkaları tarafından herhangi bir amaçla, kısmen veya tamamen çoğaltılamaz, dağıtılamaz, yayımlanamaz veya değiştirilemez.
+        </h6>
+        <h6 id="part3">Veriler Yahoo Bilgi İletişim Hiz. A.Ş. tarafından sağlanmaktadır.</h6>
+        <h6 id="part4">© 2023 Versus Stock A.Ş.</h6>
+    </div>
+
+</body>
+</html>

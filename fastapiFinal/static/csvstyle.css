@@ -1,0 +1,186 @@
+/*------------------------Navigation Bar------------------------*/
+
+.body{
+    display: flex; 
+}
+
+/* Add a black background color to the top navigation */
+.topnav {
+    background-color: #163359;
+    overflow: hidden;
+}
+  
+/* Style the links inside the navigation bar */
+.topnav a {
+    float: center;
+    color: #ffffff;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    letter-spacing: 3px;
+}
+  
+/* Change the color of links on hover */
+.topnav a:hover {
+    background-color: #ffffff;
+    color: #163359;
+    border-radius: 40px;
+}
+  
+/* Add a color to the active/current link */
+.topnav a.active {
+    background-color: #ffffff;
+    color: #163359;
+    border-radius: 40px;
+}
+  
+.container {
+    position: relative;
+    max-width: 800px; /* Maximum width */
+    margin: 0 auto; /* Center it */
+}
+    
+.container .content {
+    position: absolute; /* Position the background text */
+    bottom: 0; /* At the bottom. Use top:0 to append it to the top */
+    background: rgb(0, 0, 0); /* Fallback color */
+    background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+    color: #ffffff; /* Grey text */
+    width: 100%; /* Full width */
+    padding: 20px; /* Some padding */
+}
+  
+#logo{
+    width: 450px; 
+    height: 80px;
+    margin-top: 30px;
+    margin-left: 50px;
+    margin-bottom: 30px;
+}
+    
+#navbarbuttons{ 
+    margin-top: 60px;
+    margin-left: 620px;
+    margin-bottom: 50px;
+}
+  
+#yatirim{
+    margin-left: 110px;
+}
+
+#temettu{
+    margin-left: 110px;
+}
+
+#bilgilendirmebaslik {
+  color: #163359;
+  font-size: xx-large;
+  font-style: normal;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: underline;
+  text-align: center;
+  margin-top: 80px;
+  margin-bottom: 30px;
+}
+
+.table,
+th,
+td {
+  border: 2px solid black;
+  border-collapse: collapse;
+  height: 40px;
+  font-size: large;
+  background-color: #eff5ff;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* -------Bize Ulaşın------- */
+.column {
+    float: left;
+  }
+  
+  #bizeulasin{
+    background-color: #163359;
+    height: 65px;
+    margin-top: 70px
+  }
+  
+  #numara{
+    color: #ffffff;
+    margin-left: 225px;
+  }
+  
+  #mail{
+    color: #ffffff;
+    margin-left: 100px;
+  }
+  
+  #instagram{
+    margin-left: 550px;
+    margin-top: 8px;
+  }
+  
+  #xtwitter{
+    margin-left: 35px;
+    margin-top: 8px;
+  }
+  
+  #linkedin{
+    margin-left: 35px;
+    margin-top: 8px;
+  }
+  
+  #youtube{
+    margin-left: 35px;
+    margin-top: 9px;
+  }
+  
+  /* -------Yasal Haklar------- */
+  #yasalhaklar{
+    margin-top: 50px;
+    text-align: center;
+  }
+  
+  #part2{
+    text-align: center;
+  }
+  
+  #part3{
+    text-align: center;
+  }
+  
+  #part4{
+    text-align: center;
+  }
+
+  th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* Add border-radius to make edges round */
+th, td {
+    border-radius: 8px;
+}
+
+/* Additional style for the GetiriInfo tables */
+.rounded-table th, .rounded-table td {
+    border-radius: 8px;
+}
+
+/* Additional style for DataTable */
+.dataTables_wrapper {
+    border-radius: 8px;
+    overflow: hidden;
+}
